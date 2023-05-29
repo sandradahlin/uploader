@@ -1,6 +1,8 @@
 import { useRef, useEffect } from "react";
 import { useAppContext } from "../../hooks/useAppContext";
 import Title from "../Title";
+import Button from "../Button";
+import {StyledTextRenderer} from './TextRenderer.styled'
 
 function TextRenderer() {
   const { currentFile, analyseFile } = useAppContext();
@@ -29,11 +31,10 @@ function TextRenderer() {
   }, []);
 
   return (
-    <>
-      <button onClick={handleFileAnalyse}>Analyze my file</button>
+    <StyledTextRenderer>
       <Title title="Your file" />
       <p ref={paragraphRef}></p>
-    </>
+    </StyledTextRenderer>
   );
 }
 

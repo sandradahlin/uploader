@@ -1,6 +1,12 @@
 import { useRef, useState } from "react";
-import { StyledDropZone, StyledInput } from "./DragAndDrop.styled";
+import {
+  StyledDropZone,
+  StyledInput,
+  StyledIcon,
+  StyledDropZoneContent,
+} from "./DragAndDrop.styled";
 import { useAppContext } from "../../hooks/useAppContext";
+import Button from "../Button";
 function DragAndDrop() {
   const { currentFile, files, addFile } = useAppContext();
   console.log(files, "hh");
@@ -14,6 +20,7 @@ function DragAndDrop() {
   };
 
   const handleClick = () => {
+    console.log("hhjjjj")
     inputRef.current.click();
   };
 
@@ -51,10 +58,14 @@ function DragAndDrop() {
           id="input-file-upload"
           onChange={handleChange}
         />
-        <p>
-          Drag one or more files to this <i>drop zone</i>.
-        </p>
-        Or <button onClick={handleClick}>Upload files</button>
+        <StyledDropZoneContent>
+          <p>
+            Drag one or more files to this <i>drop zone</i>.
+          </p>
+          Or <Button text='Upload files' handleClick={handleClick} />
+        </StyledDropZoneContent>
+
+        <StyledIcon className="fa-regular fa-image"></StyledIcon>
       </StyledDropZone>
       {/* {files && files.map((file) => <p>dd</p>)} */}
     </>

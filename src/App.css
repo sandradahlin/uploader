@@ -7,8 +7,10 @@ Variables
 :root {
   --color-primary: #9bd6d2;
   --color-secondary: #377c77;
-  --color-tertiary: #d29bd6;
-  --color-dark-blue: #d29bd6;
+  --color-tertiary: #ffa114;
+  --color-dark-blue: #1b325f;
+  --color-black: #000000;
+  --color-dark-grey: #2a3b3a;
 }
 
 /*
@@ -26,9 +28,9 @@ Global Styles
 }
 
 body {
-  font-family: Lato;
-  background: var(--clr-white);
-  color: var(--clr-grey-1);
+  font-family: 'Open Sans', sans-serif;
+  background: var(--color-primary);
+  color: var(--color-dark-blue);
   line-height: 1.5;
   font-size: 0.875rem;
   min-height: 100vh;
@@ -53,7 +55,6 @@ h2,
 h3,
 h4,
 h5 {
-  letter-spacing: var(--spacing);
   text-transform: capitalize;
   line-height: 1.25;
   margin-bottom: 0.75rem;
@@ -113,19 +114,4 @@ p {
 }
 .m-l-y {
   margin: 2rem 0;
-}
-
-.btn {
-  padding: 1rem;
-  text-transform: uppercase;
-  margin: 5px;
-  letter-spacing: var(--spacing);
-  display: inline-block;
-  font-weight: 400;
-  font-size: 0.875rem;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  border-radius: var(--radius);
-  border-color: transparent;
-  color: var(--clr-toggle);
 }
