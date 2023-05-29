@@ -56,7 +56,7 @@ function DragAndDrop() {
         </p>
         Or <button onClick={handleClick}>Upload files</button>
       </StyledDropZone>
-      {files && files.map((file) => <p>dd</p>)}
+      {/* {files && files.map((file) => <p>dd</p>)} */}
     </>
   );
 }
