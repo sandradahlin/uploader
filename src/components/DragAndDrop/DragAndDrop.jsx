@@ -6,7 +6,12 @@ function DragAndDrop() {
   console.log(files, "hh");
   const inputRef = useRef(null);
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    if (e.target.files.length) {
+      const file = e.target.files[0];
+      addFile(file);
+    }
+  };
 
   const handleClick = () => {
     inputRef.current.click();
@@ -51,7 +56,7 @@ function DragAndDrop() {
         </p>
         Or <button onClick={handleClick}>Upload files</button>
       </StyledDropZone>
-      {files && files.map(file => <p>dd</p>)}
+      {files && files.map((file) => <p>dd</p>)}
     </>
   );
 }
