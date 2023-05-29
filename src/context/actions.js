@@ -1,3 +1,5 @@
 const ADD_FILE = "ADD_FILE";
+const FILE_ANALYSE = "FILE_ANALYSE";
 
-export { ADD_FILE };
+
+export { ADD_FILE, FILE_ANALYSE };

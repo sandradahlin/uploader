@@ -1,12 +1,13 @@
 import React, { useReducer } from "react";
 import reducer from "./reducer";
-import { ADD_FILE } from "./actions";
+import { ADD_FILE, FILE_ANALYSE } from "./actions";
 
 export const AppContext = React.createContext();
 
 const initialState = {
   currentFile: null,
   files: [],
+  fileAnalysed: false,
 };
 
 export const AppContextProvider = ({ children }) => {
@@ -16,8 +17,12 @@ export const AppContextProvider = ({ children }) => {
     dispatch({ type: ADD_FILE, payload: file });
   };
 
+  const analyseFile = () => {
+    dispatch({ type: FILE_ANALYSE});
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, addFile }}>
+    <AppContext.Provider value={{ ...state, addFile, analyseFile }}>
       {children}
     </AppContext.Provider>
   );

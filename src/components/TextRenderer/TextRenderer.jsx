@@ -3,7 +3,7 @@ import { useAppContext } from "../../hooks/useAppContext";
 import Title from "../Title";
 
 function TextRenderer() {
-  const { currentFile } = useAppContext();
+  const { currentFile, analyseFile } = useAppContext();
 
   const paragraphRef = useRef(null);
 
@@ -17,16 +17,20 @@ function TextRenderer() {
       },
       false
     );
-    const a = reader.readAsText(currentFile);
+    reader.readAsText(currentFile);
+  };
+
+  const handleFileAnalyse = () => {
+    analyseFile();
   };
 
   useEffect(() => {
-    // Your code here
     readFile();
   }, []);
+
   return (
     <>
-      <button>Analyze my file</button>
+      <button onClick={handleFileAnalyse}>Analyze my file</button>
       <Title title="Your file" />
       <p ref={paragraphRef}></p>
     </>

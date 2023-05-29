@@ -1,4 +1,4 @@
-import { ADD_FILE, SET_CURRENT_FILE } from "./actions";
+import { ADD_FILE, FILE_ANALYSE } from "./actions";
 
 const reducer = (state, action) => {
   const { payload } = action;
@@ -10,8 +10,11 @@ const reducer = (state, action) => {
         files: [...state.files, payload],
         currentFile: payload,
         setFile: true,
+        fileAnalysed: false
       };
     }
+    case FILE_ANALYSE:
+      return { ...state, fileAnalysed: true };
     default:
       return { ...state };
   }
