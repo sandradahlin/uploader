@@ -1,0 +1,47 @@
+import { useRef, useState } from "react";
+import { StyledDropZone, StyledInput } from "./DragAndDrop.styled";
+function DragAndDrop() {
+    const inputRef = useRef(null);
+
+    const handleChange = () => {
+
+    }
+
+    const handleClick = () => {
+        inputRef.current.click();
+    }
+
+    const handleDrop = (e) => {
+        console.log("hej")
+        e.preventDefault();
+        console.log(e.dataTransfer.items, "event") 
+         if (e.dataTransfer.items) {
+            // Use DataTransferItemList interface to access the file(s)
+            [...e.dataTransfer.items].forEach((item, i) => {
+              // If dropped items aren't files, reject them
+              if (item.kind === "file") {
+                const file = item.getAsFile();
+                console.log(`… file[${i}].name = ${file.name}`);
+              }
+            });
+        }
+    }
+
+    const handleDragOver = (e)  => {
+        e.preventDefault();
+
+    }
+
+    return (
+        <StyledDropZone
+            id="drop_zone"
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}>
+             <StyledInput ref={inputRef} type="file" id="input-file-upload" onChange={handleChange} />
+            <p>Drag one or more files to this <i>drop zone</i>.</p>
+            Or <button onClick={handleClick}>Upload files</button>
+        </StyledDropZone>
+    )
+}
+
+export default DragAndDrop;
