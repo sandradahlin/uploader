@@ -22,13 +22,9 @@ function TextRenderer() {
     reader.readAsText(currentFile);
   };
 
-  const handleFileAnalyse = () => {
-    analyseFile();
-  };
-
   useEffect(() => {
     readFile();
-  }, []);
+  }, [currentFile]);
 
   return (
     <StyledTextRenderer>

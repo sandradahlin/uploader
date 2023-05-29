@@ -1,9 +1,11 @@
+import { useAppContext } from "../../hooks/useAppContext";
 import { StyledFile } from "./File.styled";
 
 function File({ file }) {
-  console.log(file, "nammememm");
+  const { setCurrentFile } = useAppContext();
   const { name } = file;
-  return <StyledFile>{name}</StyledFile>;
+
+  return <StyledFile onClick={() => setCurrentFile(file)}>{name}</StyledFile>;
 }
 
 export default File;
