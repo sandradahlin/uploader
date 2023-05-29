@@ -1,19 +1,13 @@
-import React, { useReducer } from "react";
-import reducer from './reducer';
+import { ADD_FILE } from "./actions";
 
-const AppContext = React.createContext();
+const reducer = (state, action) => {
+  const { payload } = action;
+  switch (action.type) {
+    case ADD_FILE:
+      return { ...state, files: [...state.files, payload.file] };
+    default:
+      return { ...state };
+  }
+};
 
-const initialState = {
-    currentFile: null,
-    files: []
-}
-
-
-const AppContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    return (
-        <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
-    )
-}
-
-export default AppContextProvider;
+export default reducer;
