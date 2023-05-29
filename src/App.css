@@ -1,38 +1,131 @@
-.App {
-  text-align: center;
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+  --color-primary: #9bd6d2;
+  --color-secondary: #377c77;
+  --color-tertiary: #d29bd6;
+  --color-dark-blue: #d29bd6;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*
+=============== 
+Global Styles
+===============
+*/
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: Lato;
+  background: var(--clr-white);
+  color: var(--clr-grey-1);
+  line-height: 1.5;
+  font-size: 0.875rem;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  transition: all 0.3s linear;
 }
 
-.App-link {
-  color: #61dafb;
+ul {
+  list-style-type: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+a {
+  text-decoration: none;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--clr-grey-8);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  letter-spacing: var(--spacing);
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+h5 {
+  font-size: 0.875rem;
+}
+p {
+  margin-bottom: 1.25rem;
+}
+
+@media screen and (min-width: 800px) {
+  h1 {
+    font-size: 3rem;
   }
-  to {
-    transform: rotate(360deg);
+  h2 {
+    font-size: 2.5rem;
   }
+  h3 {
+    font-size: 2rem;
+  }
+  h4 {
+    font-size: 1.5rem;
+  }
+  h5 {
+    font-size: 1rem;
+  }
+  body {
+    font-size: 1rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1;
+  }
+}
+
+.m-sm-y {
+  margin: 1rem 0;
+}
+.m-m-y {
+  margin: 1.5rem 0;
+}
+.m-l-y {
+  margin: 2rem 0;
+}
+
+.btn {
+  padding: 1rem;
+  text-transform: uppercase;
+  margin: 5px;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  font-weight: 400;
+  font-size: 0.875rem;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius);
+  border-color: transparent;
+  color: var(--clr-toggle);
 }
