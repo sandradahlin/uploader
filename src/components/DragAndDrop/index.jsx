@@ -1,1 +1,1 @@
-export {default} from './DragAndDrop'
+export { default } from "./DragAndDrop";

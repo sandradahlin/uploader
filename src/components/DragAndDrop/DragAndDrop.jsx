@@ -9,7 +9,6 @@ import { useAppContext } from "../../hooks/useAppContext";
 import Button from "../Button";
 function DragAndDrop() {
   const { currentFile, files, addFile } = useAppContext();
-  console.log(files, "hh");
   const inputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -20,21 +19,17 @@ function DragAndDrop() {
   };
 
   const handleClick = () => {
-    console.log("hhjjjj")
     inputRef.current.click();
   };
 
   const handleDrop = (e) => {
-    console.log("hej");
     e.preventDefault();
-    console.log(e.dataTransfer.items, "event");
     if (e.dataTransfer.items) {
       // Use DataTransferItemList interface to access the file(s)
       [...e.dataTransfer.items].forEach((item, i) => {
         // If dropped items aren't files, reject them
         if (item.kind === "file") {
           const file = item.getAsFile();
-          console.log(` ${file.name}`);
           addFile(file);
         }
       });
@@ -62,7 +57,7 @@ function DragAndDrop() {
           <p>
             Drag one or more files to this <i>drop zone</i>.
           </p>
-          Or <Button text='Upload files' handleClick={handleClick} />
+          Or <Button text="Upload files" handleClick={handleClick} />
         </StyledDropZoneContent>
 
         <StyledIcon className="fa-regular fa-image"></StyledIcon>

@@ -5,7 +5,7 @@ import Button from "../Button";
 import {StyledTextRenderer} from './TextRenderer.styled'
 
 function TextRenderer() {
-  const { currentFile, analyseFile } = useAppContext();
+  const { currentFile, processText } = useAppContext();
 
   const paragraphRef = useRef(null);
 
@@ -15,7 +15,7 @@ function TextRenderer() {
       "load",
       (event) => {
         paragraphRef.current.innerText = reader.result;
-        console.log(paragraphRef);
+        processText(reader.result)
       },
       false
     );
