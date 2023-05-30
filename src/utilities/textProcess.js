@@ -2,16 +2,18 @@
  * Loops through the given word list and finds the most
  * common and the longest word. If several words have the same
  * occurrence / length in the text, then several words are
- * returned.
+ * returned. Returns also total number of characters of the
+ * words.
  * @param {string[]} wordList
  * @returns {object}
  */
 
 export const findMostCommonAndLongestWord = (wordList) => {
-  // Create object to keep the word and the number of 
+  // Create object to keep the word and the number of
   // occurrence in key/value pairs. Same goues for length
   let wordCount = {};
   let wordLength = {};
+  let characters = 0; // total characters
 
   if (!wordList) {
     return null;
@@ -21,6 +23,7 @@ export const findMostCommonAndLongestWord = (wordList) => {
   // occurrence
   for (const word of wordList) {
     if (!wordCount[word]) {
+      characters = characters + word.length;
       wordCount[word] = 1;
       wordLength[word] = word.length;
     } else {
@@ -58,8 +61,8 @@ export const findMostCommonAndLongestWord = (wordList) => {
       longestWords.push(word[0]);
     }
   }
-
-  return { mostCommonWords, longestWords };
+console.log(characters);
+  return { mostCommonWords, longestWords, characters };
 };
 
 /**
@@ -80,8 +83,7 @@ export const processWordsInText = (uploadedText) => {
   });
 
   const filteredList = wordList.filter((word) => !!word);
-  const result =
-    findMostCommonAndLongestWord(filteredList);
-    
- return result;
+  const result = findMostCommonAndLongestWord(filteredList);
+
+  return result;
 };
