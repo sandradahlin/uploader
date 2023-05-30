@@ -1,4 +1,52 @@
 /**
+ * Calculates total number of words.
+ * @param {object} wordList
+ * @returns {number} total number of words
+ */
+export const calculateTotalWords = (wordList) => {
+  let numberOfWords = Object.values(wordList).reduce(
+    (partialSum, a) => partialSum + a,
+    0
+  );
+  return numberOfWords;
+};
+
+/**
+ * Calculates most common character(s).
+ * @param {object} wordList
+ * @returns {strin[g]} most common character(s)
+ */
+export const calculateMostCommonCharacter = (wordList) => {
+  const joinedList = wordList.join("");
+  let characterCount = {};
+  // character count
+  for (let i of joinedList) {
+    if (!characterCount[i]) {
+      characterCount[i] = 1;
+    } else {
+      characterCount[i]++;
+    }
+  }
+  const sorted = Object.entries(characterCount).sort(function (a, b) {
+    return b[1] - a[1];
+  });
+
+  const mostCommonCharacters = [];
+  const maxOccurence = sorted[0][1];
+
+  // if there are several words are occur in the text
+  // same number of times, add these words to the created
+  // array
+  for (const character of sorted) {
+    if (character[1] === maxOccurence) {
+      mostCommonCharacters.push(character[0]);
+    }
+  }
+
+  return mostCommonCharacters;
+};
+
+/**
  * Loops through the given word list and finds the most
  * common and the longest word. If several words have the same
  * occurrence / length in the text, then several words are
@@ -10,7 +58,7 @@
 
 export const findMostCommonAndLongestWord = (wordList) => {
   // Create object to keep the word and the number of
-  // occurrence in key/value pairs. Same goues for length
+  // occurrence in key/value pairs. Same goes for length.
   let wordCount = {};
   let wordLength = {};
   let characters = 0; // total characters
@@ -18,9 +66,9 @@ export const findMostCommonAndLongestWord = (wordList) => {
   if (!wordList) {
     return null;
   }
-  // if no word added yet, add to the object
+  // if no word added yet, add to the object.
   // if the word is already in the object, increase its
-  // occurrence
+  // occurrence.
   for (const word of wordList) {
     if (!wordCount[word]) {
       characters = characters + word.length;
@@ -61,7 +109,7 @@ export const findMostCommonAndLongestWord = (wordList) => {
       longestWords.push(word[0]);
     }
   }
-console.log(characters);
+
   return { mostCommonWords, longestWords, characters };
 };
 
@@ -73,17 +121,19 @@ console.log(characters);
  */
 
 export const processWordsInText = (uploadedText) => {
-  console.log(uploadedText, "tobe processed");
   const wordList = uploadedText.split(" ").map((word) => {
     word = word.replace(/[^\w\s\r\n]/gi, "");
     word = word.replace(/(\r\n|\n|\r)/gm, "");
     word = word.replace(/[0-9]/g, "");
     word = word.toLowerCase();
+
     return word;
   });
 
   const filteredList = wordList.filter((word) => !!word);
   const result = findMostCommonAndLongestWord(filteredList);
-
-  return result;
+  const totalWords = filteredList.length;
+  const mostCommonCharacter = calculateMostCommonCharacter(filteredList);
+  
+  return {...result, totalWords, mostCommonCharacter};
 };

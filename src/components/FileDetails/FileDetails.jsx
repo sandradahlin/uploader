@@ -9,16 +9,20 @@ function FileDetails() {
 
   const [mostCommonWord, setMostCommonWord] = useState([]);
   const [longestWord, setLongestWord] = useState([]);
+  const [totalWords, setTotalWords] = useState(0);
+
   const [totalCharacters, setTotalCharacters] = useState(0);
+  const [mostCommonCharacter, setMostCommonCharacter] = useState(0);
 
 
   useEffect(() => {
-    const { mostCommonWords, longestWords,characters } = processWordsInText(processedText);
+    const { mostCommonWords, longestWords,characters, totalWords, mostCommonCharacter } = processWordsInText(processedText);
     console.log(characters);
     setMostCommonWord(mostCommonWords);
     setLongestWord(longestWords);
+    setTotalWords(totalWords)
     setTotalCharacters(characters);
-
+    setMostCommonCharacter(mostCommonCharacter)
     // TODO: replace several words
     const replaced = processedText
       .toLowerCase()
@@ -42,7 +46,16 @@ function FileDetails() {
         ))}
       </div>
       <div>
+        Total words: <span>{totalWords}</span>
+      </div>
+      <div>
         Total characters: <span>{totalCharacters}</span>
+      </div>
+      <div>
+        Most common character: 
+        {mostCommonCharacter.map((character) => (
+          <span>{character}</span>
+        ))}
       </div>
     </StyledFileDetails>
   );
