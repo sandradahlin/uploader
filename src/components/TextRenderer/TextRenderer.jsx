@@ -2,10 +2,10 @@ import { useRef, useEffect } from "react";
 import { useAppContext } from "../../hooks/useAppContext";
 import Title from "../Title";
 import Button from "../Button";
-import {StyledTextRenderer} from './TextRenderer.styled'
+import { StyledTextRenderer } from "./TextRenderer.styled";
 
 function TextRenderer() {
-  const { currentFile, processText } = useAppContext();
+  const { currentFile, processText, replacedText } = useAppContext();
 
   const paragraphRef = useRef(null);
 
@@ -15,7 +15,7 @@ function TextRenderer() {
       "load",
       (event) => {
         paragraphRef.current.innerText = reader.result;
-        processText(reader.result)
+        processText(reader.result);
       },
       false
     );
@@ -25,6 +25,10 @@ function TextRenderer() {
   useEffect(() => {
     readFile();
   }, [currentFile]);
+
+  useEffect(() => {
+    paragraphRef.current.innerText = replacedText;
+  }, [replacedText]);
 
   return (
     <StyledTextRenderer>

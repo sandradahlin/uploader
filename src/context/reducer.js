@@ -1,4 +1,10 @@
-import { ADD_FILE, FILE_ANALYSE, SET_CURRENT, PROCESS_TEXT } from "./actions";
+import {
+  ADD_FILE,
+  FILE_ANALYSE,
+  SET_CURRENT,
+  PROCESS_TEXT,
+  REPLACE_TEXT,
+} from "./actions";
 
 const reducer = (state, action) => {
   const { payload } = action;
@@ -22,6 +28,8 @@ const reducer = (state, action) => {
       };
     case PROCESS_TEXT:
       return { ...state, processedText: payload };
+    case REPLACE_TEXT:
+      return { ...state, replacedText: payload };
     default:
       return { ...state };
   }
