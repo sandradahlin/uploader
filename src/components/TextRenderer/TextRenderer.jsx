@@ -4,6 +4,11 @@ import Title from "../Title";
 import Button from "../Button";
 import { StyledTextRenderer } from "./TextRenderer.styled";
 
+/**
+ * TextRenderer component process and renders the uploaded file's
+ * text content. It also replaced the uploaded file with the
+ * processed text content after the analysis is done.
+ */
 function TextRenderer() {
   const { currentFile, processText, replacedText } = useAppContext();
 

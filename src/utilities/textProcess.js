@@ -134,6 +134,6 @@ export const processWordsInText = (uploadedText) => {
   const result = findMostCommonAndLongestWord(filteredList);
   const totalWords = filteredList.length;
   const mostCommonCharacter = calculateMostCommonCharacter(filteredList);
-  
-  return {...result, totalWords, mostCommonCharacter};
+
+  return { ...result, totalWords, mostCommonCharacter };
 };

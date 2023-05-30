@@ -9,7 +9,7 @@ import Title from "./components/Title";
 import Button from "./components/Button";
 
 function App() {
-  const { files, currentFile, setFile, fileAnalysed, analyseFile } = useAppContext();
+  const { files, currentFile, fileAnalysed, analyseFile } = useAppContext();
   return (
     <AppWrapper>
       <Title title="Welcome to file uploader" main />
@@ -17,7 +17,9 @@ function App() {
         {files && <FileList />}
         <DragAndDrop />
       </StyledFlexWrapper>
-     {currentFile &&  <Button text='Analyze my file' primary wide handleClick={analyseFile}/>}
+      {currentFile && (
+        <Button text="Analyze my file" primary wide handleClick={analyseFile} />
+      )}
       <StyledFlexWrapper>
         {currentFile && <TextRenderer />}
         {fileAnalysed && <FileDetails />}

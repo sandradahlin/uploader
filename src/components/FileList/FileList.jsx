@@ -1,7 +1,12 @@
 import { useAppContext } from "../../hooks/useAppContext";
 import File from "../File/File";
 import Title from "../Title";
-import  {StyledFileList} from './FileList.styled'
+import { StyledFileList } from "./FileList.styled";
+
+/**
+ * FileList component renders the list of uploaded
+ * files.
+ */
 function FileList() {
   const { files } = useAppContext();
 

@@ -4,6 +4,12 @@ import Title from "../Title";
 import { processWordsInText } from "../../utilities/textProcess";
 import { StyledFileDetails } from "./FileDetails.styled";
 
+/**
+ * FileDetails component show the detail of the uploaded
+ * file such as the most common word(s), longest word(s),
+ * total number of words, total number of charactres and
+ * the most common character.
+ */
 function FileDetails() {
   const { processedText, replaceText } = useAppContext();
 
@@ -12,17 +18,22 @@ function FileDetails() {
   const [totalWords, setTotalWords] = useState(0);
 
   const [totalCharacters, setTotalCharacters] = useState(0);
-  const [mostCommonCharacter, setMostCommonCharacter] = useState(0);
-
+  const [mostCommonCharacter, setMostCommonCharacter] = useState([]);
 
   useEffect(() => {
-    const { mostCommonWords, longestWords,characters, totalWords, mostCommonCharacter } = processWordsInText(processedText);
+    const {
+      mostCommonWords,
+      longestWords,
+      characters,
+      totalWords,
+      mostCommonCharacter,
+    } = processWordsInText(processedText);
     console.log(characters);
     setMostCommonWord(mostCommonWords);
     setLongestWord(longestWords);
-    setTotalWords(totalWords)
+    setTotalWords(totalWords);
     setTotalCharacters(characters);
-    setMostCommonCharacter(mostCommonCharacter)
+    setMostCommonCharacter(mostCommonCharacter);
     // TODO: replace several words
     const replaced = processedText
       .toLowerCase()
@@ -36,13 +47,13 @@ function FileDetails() {
       <div>
         Most common word:{" "}
         {mostCommonWord.map((word) => (
-          <span>{word}</span>
+          <span>{word} </span>
         ))}
       </div>
       <div>
         Longest word:{" "}
         {longestWord.map((word) => (
-          <span>{word}</span>
+          <span>{word} </span>
         ))}
       </div>
       <div>
@@ -52,9 +63,9 @@ function FileDetails() {
         Total characters: <span>{totalCharacters}</span>
       </div>
       <div>
-        Most common character: 
+        Most common character:
         {mostCommonCharacter.map((character) => (
-          <span>{character}</span>
+          <span>{character} </span>
         ))}
       </div>
     </StyledFileDetails>

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
   StyledDropZone,
   StyledInput,
@@ -7,8 +7,13 @@ import {
 } from "./DragAndDrop.styled";
 import { useAppContext } from "../../hooks/useAppContext";
 import Button from "../Button";
+
+/**
+ * DragAndDrop component renders Drag abd drop
+ * zone for the file upload.
+ */
 function DragAndDrop() {
-  const { currentFile, files, addFile } = useAppContext();
+  const { addFile } = useAppContext();
   const inputRef = useRef(null);
 
   const handleChange = (e) => {
