@@ -7,6 +7,8 @@ import {
   PROCESS_TEXT,
   REPLACE_TEXT,
   TOGGLE_MODAL,
+  SET_LOADING,
+  SET_LOADING_DONE,
 } from "./actions";
 
 export const AppContext = React.createContext();
@@ -18,6 +20,7 @@ const initialState = {
   processedText: null,
   replacedText: null,
   modalVisible: false,
+  loading: false,
 };
 
 export const AppContextProvider = ({ children }) => {
@@ -46,6 +49,14 @@ export const AppContextProvider = ({ children }) => {
     dispatch({ type: TOGGLE_MODAL });
   };
 
+  const setLoading = () => {
+    dispatch({ type: SET_LOADING });
+  };
+
+  const setLoadingDone = () => {
+    dispatch({ type: SET_LOADING_DONE });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -56,6 +67,8 @@ export const AppContextProvider = ({ children }) => {
         processText,
         replaceText,
         toggleModal,
+        setLoading,
+        setLoadingDone,
       }}
     >
       {children}

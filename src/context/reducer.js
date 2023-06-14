@@ -5,6 +5,8 @@ import {
   PROCESS_TEXT,
   REPLACE_TEXT,
   TOGGLE_MODAL,
+  SET_LOADING,
+  SET_LOADING_DONE,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -36,6 +38,10 @@ const reducer = (state, action) => {
     case REPLACE_TEXT:
       return { ...state, replacedText: payload };
     case TOGGLE_MODAL:
+      return { ...state, modalVisible: !state.modalVisible };
+    case SET_LOADING:
+      return { ...state, loading: !state.loading };
+    case SET_LOADING_DONE:
       return { ...state, modalVisible: !state.modalVisible };
     default:
       return { ...state };

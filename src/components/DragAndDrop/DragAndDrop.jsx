@@ -15,10 +15,15 @@ import Button from "../Button";
  * zone for the file upload.
  */
 function DragAndDrop() {
-  const { addFile, currentFile, processed, reset } = useAppContext();
+  const { addFile, currentFile, processed, reset, setLoading } =
+    useAppContext();
   const inputRef = useRef(null);
+
   const navigate = useNavigate();
+  
   const handleChange = (e) => {
+    setLoading();
+
     if (e.target.files.length) {
       const file = e.target.files[0];
       addFile(file);
@@ -31,6 +36,8 @@ function DragAndDrop() {
 
   const handleDrop = (e) => {
     e.preventDefault();
+    setLoading();
+
     if (e.dataTransfer.items) {
       // Use DataTransferItemList interface to access the file(s)
       [...e.dataTransfer.items].forEach((item, i) => {
@@ -38,6 +45,7 @@ function DragAndDrop() {
         if (item.kind === "file") {
           const file = item.getAsFile();
           addFile(file);
+       
         }
       });
     }
@@ -50,6 +58,9 @@ function DragAndDrop() {
   useEffect(() => {
     if (currentFile) {
       navigate("/details");
+      setTimeout(() => {
+        setLoading();
+      }, 3000);
     }
   }, [currentFile]);
 
