@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import DragAndDrop from "./components/DragAndDrop";
 import FileDetails from "./components/FileDetails";
@@ -7,24 +8,18 @@ import { useAppContext } from "./hooks/useAppContext";
 import { AppWrapper, StyledFlexWrapper } from "./containers/containers.styled";
 import Title from "./components/Title";
 import Button from "./components/Button";
+import Home from "./pages/Home";
+import Details from "./pages/Details";
 
 function App() {
   const { files, currentFile, fileAnalysed, analyseFile } = useAppContext();
   return (
-    <AppWrapper>
-      <Title title="Welcome to file uploader" main />
-      <StyledFlexWrapper flip>
-        {files && <FileList />}
-        <DragAndDrop />
-      </StyledFlexWrapper>
-      {currentFile && (
-        <Button text="Analyze my file" primary wide handleClick={analyseFile} />
-      )}
-      <StyledFlexWrapper>
-        {currentFile && <TextRenderer />}
-        {fileAnalysed && <FileDetails />}
-      </StyledFlexWrapper>
-    </AppWrapper>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/details" element={<Details />} />
+      </Routes>
+    </Router>
   );
 }
 

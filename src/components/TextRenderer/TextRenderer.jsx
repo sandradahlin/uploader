@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useAppContext } from "../../hooks/useAppContext";
 import Title from "../Title";
-import Button from "../Button";
+import Divider from "../Divider";
 import { StyledTextRenderer } from "./TextRenderer.styled";
 
 /**
@@ -10,7 +10,8 @@ import { StyledTextRenderer } from "./TextRenderer.styled";
  * processed text content after the analysis is done.
  */
 function TextRenderer() {
-  const { currentFile, processText, replacedText } = useAppContext();
+  const { currentFile, processText, replacedText, analyseFile, reset } =
+    useAppContext();
 
   const paragraphRef = useRef(null);
 
@@ -37,8 +38,10 @@ function TextRenderer() {
 
   return (
     <StyledTextRenderer>
+      <Divider />
       <Title title="Your file" />
       <p ref={paragraphRef}></p>
+      <Divider />
     </StyledTextRenderer>
   );
 }

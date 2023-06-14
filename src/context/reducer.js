@@ -4,6 +4,7 @@ import {
   SET_CURRENT,
   PROCESS_TEXT,
   REPLACE_TEXT,
+  TOGGLE_MODAL,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -18,7 +19,11 @@ const reducer = (state, action) => {
         fileAnalysed: false,
       };
     case FILE_ANALYSE:
-      return { ...state, fileAnalysed: true };
+      return {
+        ...state,
+        fileAnalysed: true,
+        modalVisible: !state.modalVisible,
+      };
     case SET_CURRENT:
       return {
         ...state,
@@ -30,6 +35,8 @@ const reducer = (state, action) => {
       return { ...state, processedText: payload };
     case REPLACE_TEXT:
       return { ...state, replacedText: payload };
+    case TOGGLE_MODAL:
+      return { ...state, modalVisible: !state.modalVisible };
     default:
       return { ...state };
   }

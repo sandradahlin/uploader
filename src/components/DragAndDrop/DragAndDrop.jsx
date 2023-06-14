@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   StyledDropZone,
   StyledInput,
   StyledIcon,
   StyledDropZoneContent,
+  StyledArrowIcon,
 } from "./DragAndDrop.styled";
 import { useAppContext } from "../../hooks/useAppContext";
 import Button from "../Button";
@@ -13,9 +15,9 @@ import Button from "../Button";
  * zone for the file upload.
  */
 function DragAndDrop() {
-  const { addFile } = useAppContext();
+  const { addFile, currentFile, processed, reset } = useAppContext();
   const inputRef = useRef(null);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     if (e.target.files.length) {
       const file = e.target.files[0];
@@ -45,6 +47,12 @@ function DragAndDrop() {
     e.preventDefault();
   };
 
+  useEffect(() => {
+    if (currentFile) {
+      navigate("/details");
+    }
+  }, [currentFile]);
+
   return (
     <>
       <StyledDropZone
@@ -59,13 +67,17 @@ function DragAndDrop() {
           onChange={handleChange}
         />
         <StyledDropZoneContent>
+          <StyledArrowIcon className="fa-solid fa-arrow-up"></StyledArrowIcon>
           <p>
-            Drag one or more files to this <i>drop zone</i>.
+            Drag <span>&</span> drop
           </p>
-          Or <Button text="Upload files" handleClick={handleClick} />
+          <div>
+            .txt .pdf format or{" "}
+            <Button text="browse" handleClick={handleClick} />
+          </div>
         </StyledDropZoneContent>
 
-        <StyledIcon className="fa-regular fa-image"></StyledIcon>
+        <StyledIcon className="fa-solid fa-file-pen"></StyledIcon>
       </StyledDropZone>
       {/* {files && files.map((file) => <p>dd</p>)} */}
     </>

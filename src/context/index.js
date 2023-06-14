@@ -6,6 +6,7 @@ import {
   SET_CURRENT,
   PROCESS_TEXT,
   REPLACE_TEXT,
+  TOGGLE_MODAL,
 } from "./actions";
 
 export const AppContext = React.createContext();
@@ -16,6 +17,7 @@ const initialState = {
   fileAnalysed: false,
   processedText: null,
   replacedText: null,
+  modalVisible: false,
 };
 
 export const AppContextProvider = ({ children }) => {
@@ -40,6 +42,9 @@ export const AppContextProvider = ({ children }) => {
   const replaceText = (text) => {
     dispatch({ type: REPLACE_TEXT, payload: text });
   };
+  const toggleModal = () => {
+    dispatch({ type: TOGGLE_MODAL });
+  };
 
   return (
     <AppContext.Provider
@@ -50,6 +55,7 @@ export const AppContextProvider = ({ children }) => {
         setCurrentFile,
         processText,
         replaceText,
+        toggleModal,
       }}
     >
       {children}
