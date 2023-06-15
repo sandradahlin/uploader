@@ -1,5 +1,5 @@
 import { StyledNav, StyledNavList, StyledNavIcon } from "./Navbar.styled";
-import { useAppContext } from "../../hooks/useAppContext";
+import { useAppContext } from "../../context";
 
 function Navbar() {
   const { analyseFile } = useAppContext();
@@ -9,11 +9,11 @@ function Navbar() {
   };
   
   return (
-    <StyledNav>
+    <StyledNav data-testid="navbar">
       <StyledNavIcon className="fa-solid fa-file-pen"></StyledNavIcon>
-      <StyledNavList>
-        <li onClick={handleNavigate}>Home</li>
-        <li onClick={analyseFile}>Analyze file</li>
+      <StyledNavList data-testid="navlist">
+        <li onClick={handleNavigate} data-testid="home-link">Home</li>
+        <li onClick={analyseFile} data-testid="analyze-link">Analyze file</li>
       </StyledNavList>
     </StyledNav>
   );

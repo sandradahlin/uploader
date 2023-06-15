@@ -6,9 +6,9 @@ import { StyledTitle, StyledMainTitle } from "./Title.styled";
  */
 function Title({ title, main }) {
   return main ? (
-    <StyledMainTitle>{title}</StyledMainTitle>
+    <StyledMainTitle data-testid="main-title">{title}</StyledMainTitle>
   ) : (
-    <StyledTitle>{title}</StyledTitle>
+    <StyledTitle data-testid="title">{title}</StyledTitle>
   );
 }
 

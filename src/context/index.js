@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import reducer from "./reducer";
 import {
   ADD_FILE,
@@ -8,7 +8,6 @@ import {
   REPLACE_TEXT,
   TOGGLE_MODAL,
   SET_LOADING,
-  SET_LOADING_DONE,
 } from "./actions";
 
 export const AppContext = React.createContext();
@@ -23,7 +22,7 @@ const initialState = {
   loading: false,
 };
 
-export const AppContextProvider = ({ children }) => {
+const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addFile = (file) => {
@@ -53,10 +52,6 @@ export const AppContextProvider = ({ children }) => {
     dispatch({ type: SET_LOADING });
   };
 
-  const setLoadingDone = () => {
-    dispatch({ type: SET_LOADING_DONE });
-  };
-
   return (
     <AppContext.Provider
       value={{
@@ -68,7 +63,6 @@ export const AppContextProvider = ({ children }) => {
         replaceText,
         toggleModal,
         setLoading,
-        setLoadingDone,
       }}
     >
       {children}
@@ -76,4 +70,9 @@ export const AppContextProvider = ({ children }) => {
   );
 };
 
+const useAppContext = () => {
+  return useContext(AppContext);
+};
+
+export { AppContextProvider, useAppContext };
 export default AppContext;

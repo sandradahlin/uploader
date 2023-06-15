@@ -6,7 +6,6 @@ import {
   REPLACE_TEXT,
   TOGGLE_MODAL,
   SET_LOADING,
-  SET_LOADING_DONE,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -15,10 +14,11 @@ const reducer = (state, action) => {
     case ADD_FILE:
       return {
         ...state,
-        files: [...state.files, payload],
-        currentFile: payload,
+        files: [...state.files, payload.file],
+        currentFile: payload.file,
         setFile: true,
         fileAnalysed: false,
+        processedText: payload.fileText,
       };
     case FILE_ANALYSE:
       return {
@@ -41,8 +41,6 @@ const reducer = (state, action) => {
       return { ...state, modalVisible: !state.modalVisible };
     case SET_LOADING:
       return { ...state, loading: !state.loading };
-    case SET_LOADING_DONE:
-      return { ...state, modalVisible: !state.modalVisible };
     default:
       return { ...state };
   }

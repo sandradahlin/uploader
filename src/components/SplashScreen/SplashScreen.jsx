@@ -32,7 +32,7 @@ const SplashScreen = ({ text }) => {
   };
 
   return (
-    <div style={container}>
+    <div style={container} data-testid="loader">
       <div className="splashscreen" style={styles}>
         <h1>{text}</h1>
         <ThreeDots type="ThreeDots" color="#eb7968" height={80} width={80} />

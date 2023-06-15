@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAppContext } from "../../hooks/useAppContext";
+import { useAppContext } from "../../context";
 import Title from "../Title";
 import { processWordsInText } from "../../utilities/textProcess";
 import { StyledFileDetails, StyledIcon,StyledWord } from "./FileDetails.styled";
@@ -23,9 +23,8 @@ function FileDetails() {
   const closeModal = () => {
     toggleModal();
   }
-  useEffect(() => {
-    console.log("hej", processedText);
 
+  useEffect(() => {
     const {
       mostCommonWords,
       longestWords,
@@ -47,19 +46,19 @@ function FileDetails() {
   // TODO: add loader
   return (
     <>
-      <StyledFileDetails>
+      <StyledFileDetails data-testid="file-details">
       <StyledIcon className="fa-solid fa-x" onClick={closeModal}></StyledIcon>
         <Title title="File details" />
         <div>
           Most common word:{" "}
           {mostCommonWord.map((word) => (
-            <StyledWord>{word} </StyledWord>
+            <StyledWord key={word}>{word} </StyledWord>
           ))}
         </div>
         <div>
           Longest word:{" "}
           {longestWord.map((word) => (
-            <StyledWord>{word} </StyledWord>
+            <StyledWord key={word}>{word} </StyledWord>
           ))}
         </div>
         <div>
@@ -71,7 +70,7 @@ function FileDetails() {
         <div>
           Most common character:
           {mostCommonCharacter.map((character) => (
-            <StyledWord>{character} </StyledWord>
+            <StyledWord key={character}>{character} </StyledWord>
           ))}
         </div>
       </StyledFileDetails>

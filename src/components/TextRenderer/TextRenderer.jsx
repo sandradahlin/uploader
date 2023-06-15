@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { useAppContext } from "../../hooks/useAppContext";
+import { useAppContext } from "../../context";
 import Title from "../Title";
 import Divider from "../Divider";
 import { StyledTextRenderer } from "./TextRenderer.styled";
@@ -10,37 +10,23 @@ import { StyledTextRenderer } from "./TextRenderer.styled";
  * processed text content after the analysis is done.
  */
 function TextRenderer() {
-  const { currentFile, processText, replacedText, analyseFile, reset } =
-    useAppContext();
+  const { replacedText, processedText } = useAppContext();
 
   const paragraphRef = useRef(null);
-
-  const readFile = () => {
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      (event) => {
-        paragraphRef.current.innerText = reader.result;
-        processText(reader.result);
-      },
-      false
-    );
-    reader.readAsText(currentFile);
-  };
-
-  useEffect(() => {
-    readFile();
-  }, [currentFile]);
 
   useEffect(() => {
     paragraphRef.current.innerText = replacedText;
   }, [replacedText]);
 
+  useEffect(() => {
+    paragraphRef.current.innerText = processedText;
+  }, [processedText]);
+
   return (
-    <StyledTextRenderer>
+    <StyledTextRenderer data-testid="text-renderer">
       <Divider />
       <Title title="Your file" />
-      <p ref={paragraphRef}></p>
+      <p ref={paragraphRef} data-testid="uploaded-text-content"></p>
       <Divider />
     </StyledTextRenderer>
   );

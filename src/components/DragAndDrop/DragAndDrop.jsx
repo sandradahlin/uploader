@@ -7,11 +7,11 @@ import {
   StyledDropZoneContent,
   StyledArrowIcon,
 } from "./DragAndDrop.styled";
-import { useAppContext } from "../../hooks/useAppContext";
+import { useAppContext } from "../../context";
 import Button from "../Button";
 
 /**
- * DragAndDrop component renders Drag abd drop
+ * DragAndDrop component renders Drag and drop
  * zone for the file upload.
  */
 function DragAndDrop() {
@@ -20,13 +20,14 @@ function DragAndDrop() {
   const inputRef = useRef(null);
 
   const navigate = useNavigate();
-  
-  const handleChange = (e) => {
+
+  const handleChange = async (e) => {
     setLoading();
 
     if (e.target.files.length) {
       const file = e.target.files[0];
-      addFile(file);
+      const fileText = await e.target.files[0].text();
+      addFile({ file, fileText });
     }
   };
 
@@ -34,18 +35,19 @@ function DragAndDrop() {
     inputRef.current.click();
   };
 
-  const handleDrop = (e) => {
+  const handleDrop = async (e) => {
     e.preventDefault();
     setLoading();
 
     if (e.dataTransfer.items) {
       // Use DataTransferItemList interface to access the file(s)
-      [...e.dataTransfer.items].forEach((item, i) => {
+      [...e.dataTransfer.items].forEach(async (item, i) => {
         // If dropped items aren't files, reject them
         if (item.kind === "file") {
           const file = item.getAsFile();
-          addFile(file);
-       
+          const fileText = await file.text();
+
+          addFile({file, fileText});
         }
       });
     }
@@ -56,8 +58,10 @@ function DragAndDrop() {
   };
 
   useEffect(() => {
+    // TODO: fix redirecting
     if (currentFile) {
       navigate("/details");
+      // Mimic loading
       setTimeout(() => {
         setLoading();
       }, 3000);
@@ -70,12 +74,14 @@ function DragAndDrop() {
         id="drop_zone"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
+        data-testid="dragAndDrop-container"
       >
         <StyledInput
           ref={inputRef}
           type="file"
           id="input-file-upload"
           onChange={handleChange}
+          data-testid="input-upload"
         />
         <StyledDropZoneContent>
           <StyledArrowIcon className="fa-solid fa-arrow-up"></StyledArrowIcon>
@@ -83,14 +89,17 @@ function DragAndDrop() {
             Drag <span>&</span> drop
           </p>
           <div>
-            .txt .pdf format or{" "}
-            <Button text="browse" handleClick={handleClick} />
+            drag to add .txt format or{" "}
+            <Button
+              text="browse"
+              handleClick={handleClick}
+              data-testid="browse-button"
+            />
           </div>
         </StyledDropZoneContent>
 
         <StyledIcon className="fa-solid fa-file-pen"></StyledIcon>
       </StyledDropZone>
-      {/* {files && files.map((file) => <p>dd</p>)} */}
     </>
   );
 }
