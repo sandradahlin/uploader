@@ -3,7 +3,6 @@ import * as AppContext from "../../context";
 import Button from "./Button";
 
 describe("Button component", () => {
-  let component;
   const testProps = {
     text: "Title",
     primary: true,
@@ -37,20 +36,20 @@ describe("Button component", () => {
 
   it("renders wide button", () => {
     // Arrange
-    
+  
     expect.assertions(2)
     const testProps = {
         text: "Title",
         wide: true,
     
       };
+
     // Act
-
     render(<Button {...testProps} />);
-    const button = screen.getByTestId("button");
-    screen.debug();
-    // Assert
 
+    const button = screen.getByTestId("button");
+
+    // Assert
     expect(button).toBeVisible();
     expect(button).toHaveStyle('margin: 3rem 0');
 

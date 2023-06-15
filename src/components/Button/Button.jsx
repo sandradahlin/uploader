@@ -6,7 +6,12 @@ import { StyledButton } from "./Button.styled";
  */
 function Button({ text, primary = false, wide = false, handleClick }) {
   return (
-    <StyledButton primary={primary} wide={wide} onClick={handleClick} data-testid="button">
+    <StyledButton
+      primary={primary}
+      wide={wide}
+      onClick={handleClick}
+      data-testid="button"
+    >
       {text}
     </StyledButton>
   );

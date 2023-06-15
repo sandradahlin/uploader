@@ -9,6 +9,7 @@ import {
 } from "./DragAndDrop.styled";
 import { useAppContext } from "../../context";
 import Button from "../Button";
+import { ROUTES } from "../../routes";
 
 /**
  * DragAndDrop component renders Drag and drop
@@ -16,11 +17,12 @@ import Button from "../Button";
  */
 function DragAndDrop() {
   const { addFile, currentFile, processed, reset, setLoading } =
-    useAppContext();
-  const inputRef = useRef(null);
+    useAppContext();,
 
+  const inputRef = useRef(null);
   const navigate = useNavigate();
 
+  const st
   const handleChange = async (e) => {
     setLoading();
 
@@ -28,6 +30,10 @@ function DragAndDrop() {
       const file = e.target.files[0];
       const fileText = await e.target.files[0].text();
       addFile({ file, fileText });
+      navigate(ROUTES.details);
+      setTimeout(() => {
+        setLoading();
+      }, 3000);
     }
   };
 
@@ -47,7 +53,11 @@ function DragAndDrop() {
           const file = item.getAsFile();
           const fileText = await file.text();
 
-          addFile({file, fileText});
+          addFile({ file, fileText });
+          navigate(ROUTES.details);
+          setTimeout(() => {
+            setLoading();
+          }, 3000);
         }
       });
     }
@@ -56,17 +66,6 @@ function DragAndDrop() {
   const handleDragOver = (e) => {
     e.preventDefault();
   };
-
-  useEffect(() => {
-    // TODO: fix redirecting
-    if (currentFile) {
-      navigate("/details");
-      // Mimic loading
-      setTimeout(() => {
-        setLoading();
-      }, 3000);
-    }
-  }, [currentFile]);
 
   return (
     <>
