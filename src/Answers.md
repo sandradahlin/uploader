@@ -1,0 +1,4 @@
+1. it took me several afternoons after work, on / off combined with my vacation.
+2. I used the code structure I usually work with and most commonly encounter.
+3. I would have worked more on handling the edge cases and potential errors. I did not really have time to do that. I would have focused more on checking if the txt file is correct and it it actually contains words. ( right now there is only a check on hte lenght of the text that is uplaoded). Also to figure out how to maintain the capitalization of the replaced word. (right now the words are lowecased when finding the most common word). I would have also devoted more time to how I deal with underscores, hyphens, numbers etc ( for example in one of the files there were words like H_E_L_L_O) and other cases.
+4. It was fun, I've never done anything similar before.
