@@ -29,6 +29,9 @@ const StyledIcon = styled.i`
 
 const StyledWord = styled.span`
   color: var(--color-primary);
+  &:not(:first-of-type)::before{
+    content: ", ";
+  }
 `;
 
 export { StyledFileDetails, StyledIcon, StyledWord };

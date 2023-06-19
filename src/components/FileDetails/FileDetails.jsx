@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "../../context";
 import Title from "../Title";
 import { processWordsInText } from "../../utilities/textProcess";
-import { StyledFileDetails, StyledIcon,StyledWord } from "./FileDetails.styled";
+import {
+  StyledFileDetails,
+  StyledIcon,
+  StyledWord,
+} from "./FileDetails.styled";
 
 /**
  * FileDetails component show the detail of the uploaded
@@ -11,7 +15,7 @@ import { StyledFileDetails, StyledIcon,StyledWord } from "./FileDetails.styled";
  * the most common character.
  */
 function FileDetails() {
-  const { processedText, replaceText,toggleModal } = useAppContext();
+  const { processedText, replaceText, toggleModal } = useAppContext();
 
   const [mostCommonWord, setMostCommonWord] = useState([]);
   const [longestWord, setLongestWord] = useState([]);
@@ -22,9 +26,12 @@ function FileDetails() {
 
   const closeModal = () => {
     toggleModal();
-  }
+  };
 
   useEffect(() => {
+    if (!processedText) {
+      return;
+    }
     const {
       mostCommonWords,
       longestWords,
@@ -37,22 +44,28 @@ function FileDetails() {
     setTotalWords(totalWords);
     setTotalCharacters(characters);
     setMostCommonCharacter(mostCommonCharacter);
-    // TODO: replace several words
-    const replaced = processedText
-      .toLowerCase()
-      .replaceAll(mostCommonWords[0], `foo${mostCommonWords[0]}bar`);
+
+    let replaced = processedText;
+    for (const commonWord of mostCommonWords) {
+      var regexp = new RegExp("\\b" + commonWord + "\\b", "gmi");
+      replaced = replaced.replaceAll(regexp, `foo${commonWord}bar`);
+    }
+
     replaceText(replaced);
   }, [processedText]);
-  // TODO: add loader
+
+  if (!processedText) {
+    return;
+  }
   return (
     <>
       <StyledFileDetails data-testid="file-details">
-      <StyledIcon className="fa-solid fa-x" onClick={closeModal}></StyledIcon>
+        <StyledIcon className="fa-solid fa-x" onClick={closeModal}></StyledIcon>
         <Title title="File details" />
         <div>
           Most common word:{" "}
           {mostCommonWord.map((word) => (
-            <StyledWord key={word}>{word} </StyledWord>
+            <StyledWord key={word}>{word}</StyledWord>
           ))}
         </div>
         <div>
@@ -70,7 +83,7 @@ function FileDetails() {
         <div>
           Most common character:
           {mostCommonCharacter.map((character) => (
-            <StyledWord key={character}>{character} </StyledWord>
+            <StyledWord key={character}> {character} </StyledWord>
           ))}
         </div>
       </StyledFileDetails>

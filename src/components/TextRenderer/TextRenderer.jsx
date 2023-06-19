@@ -22,6 +22,13 @@ function TextRenderer() {
     paragraphRef.current.innerText = processedText;
   }, [processedText]);
 
+  
+  useEffect(() => {
+    if(processedText.length === 0){
+      paragraphRef.current.innerText = "Text file empty";
+    }
+  }, []);
+
   return (
     <StyledTextRenderer data-testid="text-renderer">
       <Divider />

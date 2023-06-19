@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as AppContext from "../../context";
 import DragAndDrop from "./DragAndDrop";
@@ -51,8 +51,6 @@ describe("DragAndDrop component", () => {
     File.prototype.text = jest.fn().mockResolvedValueOnce("test-file");
     userEvent.upload(input, file);
 
-    console.log(input.files);
-    // await userEvent.upload("file");
     // Assert
     expect(input.files[0].name).toBe("foo.txt");
     expect(input.files.length).toBe(1);
@@ -75,27 +73,5 @@ describe("DragAndDrop component", () => {
     // Assert
 
     expect(contextValues.setLoading).toHaveBeenCalledTimes(1);
-  });
-
-  it("navigates to details if the current file is set", async () => {
-    // Arrange
-    expect.assertions(2);
-    const contextValues = {
-      addFile: jest.fn(),
-      currentFile: { name: "test" },
-      setLoading: jest.fn(),
-    };
-
-    jest
-      .spyOn(AppContext, "useAppContext")
-      .mockImplementation(() => contextValues);
-
-    render(<DragAndDrop />);
-
-    // Act & Assert
-
-    expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
-    expect(mockedUsedNavigate).toHaveBeenCalledWith("/details");
-
   });
 });

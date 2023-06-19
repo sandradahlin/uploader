@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   StyledDropZone,
@@ -16,13 +16,12 @@ import { ROUTES } from "../../routes";
  * zone for the file upload.
  */
 function DragAndDrop() {
-  const { addFile, currentFile, processed, reset, setLoading } =
-    useAppContext();,
+  const { addFile, setLoading } =
+    useAppContext();
 
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
-  const st
   const handleChange = async (e) => {
     setLoading();
 
@@ -33,7 +32,7 @@ function DragAndDrop() {
       navigate(ROUTES.details);
       setTimeout(() => {
         setLoading();
-      }, 3000);
+      }, 2000);
     }
   };
 
@@ -57,7 +56,7 @@ function DragAndDrop() {
           navigate(ROUTES.details);
           setTimeout(() => {
             setLoading();
-          }, 3000);
+          }, 2000);
         }
       });
     }
